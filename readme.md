@@ -1,0 +1,1 @@
+old style spring mvc using spring 6 and tomcat10(jakarta ee)
