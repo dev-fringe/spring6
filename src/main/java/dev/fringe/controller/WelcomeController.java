@@ -1,6 +1,7 @@
 package dev.fringe.controller;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 import java.util.Date;
 
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.WebApplicationContext;
 
 import lombok.extern.log4j.Log4j2;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+
 @Controller
 @Log4j2
 @SpringJUnitWebConfig(locations = "/servlet-context.xml")
@@ -33,16 +34,16 @@ public class WelcomeController {
 	@Autowired
 	WebApplicationContext wac;
 
-	MockMvc mvc;
+	MockMvc mock;
 
 	@BeforeEach
 	public void before() {
-		mvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+		mock = MockMvcBuilders.webAppContextSetup(this.wac).build();
 	}
 
 	@Test
 	public void testController() throws Exception {
-		mvc.perform(get("/")).andDo(print());
+		mock.perform(get("/")).andDo(print());
 	}
 	// JUnit END
 }
