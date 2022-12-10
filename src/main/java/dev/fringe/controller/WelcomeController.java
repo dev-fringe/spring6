@@ -14,18 +14,23 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.WebApplicationContext;
 
+import lombok.extern.log4j.Log4j2;
+
 @Controller
+@Log4j2
 @SpringJUnitWebConfig(locations = "classpath:mvc-dispatcher-servlet.xml")
 public class WelcomeController {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public @ResponseBody String home() {
+		log.debug("{}", () -> "Controller");
 		return "Hello";
 	}
 
 	// JUnit
-	@Autowired  WebApplicationContext wac;
-	   
+	@Autowired
+	WebApplicationContext wac;
+
 	MockMvc mvc;
 
 	@BeforeEach
@@ -35,8 +40,7 @@ public class WelcomeController {
 
 	@Test
 	public void testController() throws Exception {
-		System.out.println(mvc.perform(get("/")).andReturn().getResponse().getContentAsString());
+		log.info(mvc.perform(get("/")).andReturn().getResponse().getContentAsString());
 	}
 	// JUnit END
 }
-
