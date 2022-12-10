@@ -20,22 +20,24 @@ import org.springframework.web.context.WebApplicationContext;
 @Controller
 @ContextConfiguration("classpath:mvc-dispatcher-servlet.xml")
 @WebAppConfiguration
-@ExtendWith(SpringExtension.class) 
+@ExtendWith(SpringExtension.class)
 public class WelcomeController {
-	
+
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public @ResponseBody String home() {
 		return "Hello";
 	}
-	
+
 	private MockMvc mockMvc;
-	 
-    @Autowired private WebApplicationContext context;
-    
-    @BeforeEach
-    public void startup() {
-        mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
-    }
+
+	@Autowired
+	private WebApplicationContext context;
+
+	@BeforeEach
+	public void startup() {
+		mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
+	}
+
 	@Test
 	public void sometest() throws Exception {
 		System.out.println(mockMvc.perform(get("/")).andReturn().getResponse().getContentAsString());
