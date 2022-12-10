@@ -18,7 +18,7 @@ import lombok.extern.log4j.Log4j2;
 
 @Controller
 @Log4j2
-@SpringJUnitWebConfig(locations = "classpath:mvc-dispatcher-servlet.xml")
+@SpringJUnitWebConfig(locations = "/servlet-context.xml")
 public class WelcomeController {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
