@@ -4,12 +4,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.test.context.junit.jupiter.web.SpringJUnitWebConfig;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,9 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.WebApplicationContext;
 
 @Controller
-@ContextConfiguration("classpath:mvc-dispatcher-servlet.xml")
-@WebAppConfiguration
-@ExtendWith(SpringExtension.class)
+@SpringJUnitWebConfig(locations = "classpath:mvc-dispatcher-servlet.xml")
 public class WelcomeController {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
@@ -28,18 +23,20 @@ public class WelcomeController {
 		return "Hello";
 	}
 
-	private MockMvc mockMvc;
-
-	@Autowired
-	private WebApplicationContext context;
+	// JUnit
+	@Autowired  WebApplicationContext wac;
+	   
+	MockMvc mvc;
 
 	@BeforeEach
-	public void startup() {
-		mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
+	public void before() {
+		mvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
 	}
 
 	@Test
-	public void sometest() throws Exception {
-		System.out.println(mockMvc.perform(get("/")).andReturn().getResponse().getContentAsString());
+	public void testController() throws Exception {
+		System.out.println(mvc.perform(get("/")).andReturn().getResponse().getContentAsString());
 	}
+	// JUnit END
 }
+
