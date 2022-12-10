@@ -13,18 +13,17 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.WebApplicationContext;
 
 import lombok.extern.log4j.Log4j2;
-
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 @Controller
 @Log4j2
 @SpringJUnitWebConfig(locations = "/servlet-context.xml")
 public class WelcomeController {
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public  String home(Model model) {
+	@RequestMapping(value = "/")
+	public String home(Model model) {
 		log.debug("{}", () -> "Controller");
 		model.addAttribute("message", new Date());
 		return "Hello";
@@ -43,7 +42,7 @@ public class WelcomeController {
 
 	@Test
 	public void testController() throws Exception {
-		log.info(mvc.perform(get("/")).andReturn().getResponse().getContentAsString());
+		mvc.perform(get("/")).andDo(print());
 	}
 	// JUnit END
 }
