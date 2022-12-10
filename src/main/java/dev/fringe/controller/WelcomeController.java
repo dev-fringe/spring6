@@ -11,7 +11,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.WebApplicationContext;
 
 import lombok.extern.log4j.Log4j2;
@@ -22,7 +21,7 @@ import lombok.extern.log4j.Log4j2;
 public class WelcomeController {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public @ResponseBody String home() {
+	public  String home() {
 		log.debug("{}", () -> "Controller");
 		return "Hello";
 	}

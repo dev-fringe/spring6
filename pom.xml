@@ -64,6 +64,27 @@
 		    <artifactId>log4j-api</artifactId>
 		    <version>2.19.0</version>
 		</dependency>
+		
+		<!-- jstl start -->
+		<dependency>
+		    <groupId>jakarta.servlet.jsp.jstl</groupId>
+		    <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
+		    <version>3.0.0</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.glassfish.web</groupId>
+		    <artifactId>jakarta.servlet.jsp.jstl</artifactId>
+		    <version>3.0.1</version>
+		</dependency>
+		<!-- jstl end -->
+		
+		<!-- using javax.servlet.http.HttpServletRequest end  -->
+		<dependency>
+		    <groupId>com.github.mjeanroy</groupId>
+		    <artifactId>springmvc-mustache-mustachejava</artifactId>
+		    <version>2.0.0</version>
+		</dependency>
 
 	</dependencies>
 	<build>
