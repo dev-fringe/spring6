@@ -15,12 +15,21 @@
 		base-package="dev.fringe.controller" />
 
 	<!-- <mvc:annotation-driven /> -->
-	<bean
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="viewClass"
-			value="org.springframework.web.servlet.view.JstlView" />
-		<property name="prefix" value="/WEB-INF/jsp/" />
-		<property name="suffix" value=".jsp" />
-	</bean>
+<!-- 	<bean -->
+<!-- 		class="org.springframework.web.servlet.view.InternalResourceViewResolver"> -->
+<!-- 		<property name="viewClass" -->
+<!-- 			value="org.springframework.web.servlet.view.JstlView" /> -->
+<!-- 		<property name="prefix" value="/WEB-INF/jsp/" /> -->
+<!-- 		<property name="suffix" value=".jsp" /> -->
+<!-- 	</bean> -->
+
+<!-- <bean id="mustacheCompiler" class="com.github.mjeanroy.springmvc.view.mustache.configuration.MustacheCompilerFactoryBean" /> -->
+
+	<bean class="org.springframework.boot.web.servlet.view.MustacheViewResolver">
+<!--   <constructor-arg ref="mustacheCompiler" />		 -->
+				<property name="charset" value="utf-8" />
+		<property name="prefix" value="classpath:/templates/" />
+		<property name="suffix" value=".html" />
+	</bean>	
 	<bean class="dev.fringe.config.CommonConfig" />
 </beans>

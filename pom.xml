@@ -80,10 +80,16 @@
 		<!-- jstl end -->
 		
 		<!-- using javax.servlet.http.HttpServletRequest end  -->
-		<dependency>
+<!--		<dependency>
 		    <groupId>com.github.mjeanroy</groupId>
 		    <artifactId>springmvc-mustache-mustachejava</artifactId>
 		    <version>2.0.0</version>
+		</dependency> -->
+		
+		<dependency>
+		    <groupId>com.samskivert</groupId>
+		    <artifactId>jmustache</artifactId>
+		    <version>1.15</version>
 		</dependency>
 
 	</dependencies>
