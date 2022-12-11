@@ -1,5 +1,7 @@
 package dev.fringe.controller;
 
+import static io.undertow.servlet.Servlets.defaultContainer;
+import static io.undertow.servlet.Servlets.deployment;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
@@ -14,8 +16,17 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
+import org.springframework.web.servlet.DispatcherServlet;
 
+import io.undertow.Handlers;
+import io.undertow.Undertow;
+import io.undertow.servlet.Servlets;
+import io.undertow.servlet.api.ListenerInfo;
+import io.undertow.servlet.util.ImmediateInstanceFactory;
+import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j2;
 
 @Controller
@@ -46,4 +57,25 @@ public class WelcomeController {
 		mock.perform(get("/")).andDo(print());
 	}
 	// JUnit END
+	
+
+	 
+	@SneakyThrows
+    public static void main(final String[] args) {
+		var contextPath = "/";
+		var context = new AnnotationConfigWebApplicationContext();
+		context.setConfigLocation("classpath:servlet-context.xml");  //need more config. no mapping for GET /
+		var servletBuilder =deployment()// you want jsp page more config.
+		        .setClassLoader(WelcomeController.class.getClassLoader())
+		        .setContextPath(contextPath)
+		        .setDeploymentName("test.war")
+		        .addServlet(
+		        		Servlets.servlet("DispatcherServlet", DispatcherServlet.class, new ImmediateInstanceFactory<>(new DispatcherServlet(context))).addMapping("/*"))
+		        .addListener(new ListenerInfo( ContextLoaderListener.class, new ImmediateInstanceFactory<>(new ContextLoaderListener(context))));
+		var manager = defaultContainer().addDeployment(servletBuilder);
+		manager.deploy();
+		var path = Handlers.path().addPrefixPath(contextPath, manager.start());
+		Undertow.builder().addHttpListener(8080, "0.0.0.0").setHandler(path).build().start();    
+    }
+
 }
