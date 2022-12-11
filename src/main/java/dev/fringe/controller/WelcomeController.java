@@ -58,24 +58,24 @@ public class WelcomeController {
 	}
 	// JUnit END
 	
-
-	 
+	//embedded server 
 	@SneakyThrows
-    public static void main(final String[] args) {
+	public static void main(final String[] args) {
 		var contextPath = "/";
 		var context = new AnnotationConfigWebApplicationContext();
-		context.setConfigLocation("classpath:servlet-context.xml");  //need more config. no mapping for GET /
-		var servletBuilder =deployment()// you want jsp page more config.
-		        .setClassLoader(WelcomeController.class.getClassLoader())
-		        .setContextPath(contextPath)
-		        .setDeploymentName("test.war")
-		        .addServlet(
-		        		Servlets.servlet("DispatcherServlet", DispatcherServlet.class, new ImmediateInstanceFactory<>(new DispatcherServlet(context))).addMapping("/*"))
-		        .addListener(new ListenerInfo( ContextLoaderListener.class, new ImmediateInstanceFactory<>(new ContextLoaderListener(context))));
+		context.setConfigLocation("classpath:servlet-context.xml"); // need more config. no mapping for GET /
+		var servletBuilder = deployment()// you want jsp page more config.
+				.setClassLoader(WelcomeController.class.getClassLoader()).setContextPath(contextPath)
+				.setDeploymentName("test.war")
+				.addServlet(Servlets.servlet("DispatcherServlet", DispatcherServlet.class,
+						new ImmediateInstanceFactory<>(new DispatcherServlet(context))).addMapping("/*"))
+				.addListener(new ListenerInfo(ContextLoaderListener.class,
+						new ImmediateInstanceFactory<>(new ContextLoaderListener(context))));
 		var manager = defaultContainer().addDeployment(servletBuilder);
 		manager.deploy();
 		var path = Handlers.path().addPrefixPath(contextPath, manager.start());
-		Undertow.builder().addHttpListener(8080, "0.0.0.0").setHandler(path).build().start();    
-    }
+		Undertow.builder().addHttpListener(8080, "0.0.0.0").setHandler(path).build().start();
+	}
+	//embedded server end
 
 }
