@@ -1,0 +1,15 @@
+{
+	"scripts": {
+		"build": "webpack"
+	},
+	"dependencies": {
+		"@polymer/polymer": "^3.5.1",
+		"lit": "^2.2.6"
+	},
+	"devDependencies": {
+		"esbuild-loader": "^2.19.0",
+		"typescript": "^4.7.4",
+		"webpack": "^5.73.0",
+		"webpack-cli": "^4.10.0"
+	}
+}
