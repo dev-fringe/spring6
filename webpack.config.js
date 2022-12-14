@@ -13,7 +13,8 @@ module.exports = {
 	resolve: {
 		extensions: ['.ts']
 	},
-	mode: 'development',
+	devtool: "source-map",
+	mode: 'production',
 	module: {
 		rules: [{
 			test: /\.ts$/,
