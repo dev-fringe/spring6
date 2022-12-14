@@ -1,6 +1,6 @@
 import { LitElement, html } from 'lit-element';
 import { customElement, property } from 'lit-element/decorators.js';
- 
+
 @customElement('fetching-data')
 export class FetchingData extends LitElement {
 
