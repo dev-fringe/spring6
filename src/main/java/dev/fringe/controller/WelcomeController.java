@@ -16,11 +16,14 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
 
+import dev.fringe.model.People;
 import io.undertow.Handlers;
 import io.undertow.Undertow;
 import io.undertow.servlet.Servlets;
@@ -39,6 +42,13 @@ public class WelcomeController {
 		log.debug("{}", () -> "Controller");
 		model.addAttribute("message", new Date());
 		return "Hello";
+	}
+
+	@Autowired RestTemplate restTemplate;
+	
+	@RequestMapping(value = "/get.do")
+	public @ResponseBody People data(Model model) {
+		return restTemplate.getForObject("https://swapi.dev/api/people/", People.class);
 	}
 
 	// JUnit

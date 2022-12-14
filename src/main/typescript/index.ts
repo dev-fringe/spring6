@@ -1,30 +1,26 @@
 import { LitElement, html } from 'lit-element';
 import { customElement, property } from 'lit-element/decorators.js';
 
-@customElement('manage-properties')
-export class BasicSetup extends LitElement {
+@customElement('fetching-data')
+export class FetchingData extends LitElement {
 
-  @property()
-  message?: string;
-  count: number = 0;
+  @property({type : Array})
+  res = []
 
-  render() {
-    return html`
-      <div>
-        <div>
-          The message is: ${this.message}, count is: ${this.count}
-        </div>
-        <div>
-          The reversed message is: ${this.reverseMessage(this.message)}
-        </div>
-      </div>
-    `;
+  firstUpdated() {
+    fetch("/get.do")
+      .then((r) => r.json())
+      .then((r) => {
+        this.res = r.results
+      })
   }
 
-  reverseMessage(message) {
-    return message
-      .split("")
-      .reverse()
-      .join("");
+  render() {
+    const { res } = this;
+    return html`
+      <ul>
+        ${res.map((item) => html` <li>${item.name}</li> `)}
+      </ul>
+    `
   }
 }

@@ -1,6 +1,7 @@
 {
 	"scripts": {
-		"build": "webpack"
+		"build": "webpack",
+		"watch": "webpack --watch"
 	},
 	"dependencies": {
 		"@polymer/polymer": "^3.5.1",
