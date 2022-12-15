@@ -1,10 +1,9 @@
-'use strict';
-const { resolve } = require('path');
+const path  = require('path');
 
 module.exports = {
 	entry: './src/main/typescript/index.ts',
 	output: {
-		path: resolve('./src/main/webapp'),
+		path: path.resolve('./src/main/webapp'),
 		filename: '[name].js'
 	},
 	experiments: {
