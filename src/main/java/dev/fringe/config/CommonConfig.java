@@ -12,7 +12,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 public class CommonConfig {
 	
 	@Bean
-	RestTemplate restTemplate() { //cloud open-feign
+	RestTemplate restTemplate() {//cloud open-feign
 		return new RestTemplate();
 	}
 }
