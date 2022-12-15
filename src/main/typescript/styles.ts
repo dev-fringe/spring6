@@ -8,6 +8,6 @@ export const styles = html`
     }
     .message {
         color: blue;
-    }
+    } 
   </style>
 `;
