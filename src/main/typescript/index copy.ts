@@ -1,5 +1,6 @@
 import { LitElement, html } from 'lit'
 import { customElement, property } from 'lit-element/decorators.js'
+import { styles } from './styles'
 import { repeat } from 'lit-html/directives/repeat.js'
 
 @customElement('fetching-data')
@@ -9,16 +10,23 @@ export class FetchingData extends LitElement {
 	res = []
 	value : String 
  
+	// firstUpdated() {
+	// 	fetch("/get.do").then((r) => r.json()).then((r) => {
+	// 		this.res = r.results
+	// 	})
+	// }
+
 	render() {
 		return html`
 		<input type="text" .value="${this.value || ''}" @input="${this.inputHandler}">
-			<button @click="${this.click}">get</button>
+			<button @click="${this._handleClick}">get</button>
 			<ul>
 			${repeat(this.res,item => html` <li class="message">${item.name}</li> `)}
 			</ul>
 		`
 	}
-	click() {
+
+	_handleClick(e) {
 		console.log(this.value);
 		fetch("/get.do").then((r) => r.json()).then((r) => {
 			this.res = r.results
@@ -32,4 +40,4 @@ export class FetchingData extends LitElement {
 		  detail: this.value
 		}));
 	  }
-} 
+}  
