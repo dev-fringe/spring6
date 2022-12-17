@@ -52,7 +52,7 @@ public class WelcomeController {
 
 	@Autowired RestTemplate restTemplate;
 	
-	@PostMapping("/post.do")
+	@PostMapping("/postJSON.do")
 	public @ResponseBody People data(Model model, @RequestBody Map<String, String> data) {
 		People p = restTemplate.getForObject("https://swapi.dev/api/people/", People.class);
 		List<Result> results = new ArrayList<>();

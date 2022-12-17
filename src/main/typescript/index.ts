@@ -5,7 +5,6 @@ import { styles } from './styles'
 
 @customElement('fetching-data')
 export class FetchingData extends LitElement {
-
 	@property()
 	res = []
 	value = ""
@@ -29,18 +28,20 @@ export class FetchingData extends LitElement {
 		</table>
 		`
 	}
+
 	_post() {
-		fetch("/post.do",
-			{headers: {
-			'Accept': 'application/json',
-			'Content-Type': 'application/json'
+		fetch("/postJSON.do",{
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
 		  	},
 		 	method: 'POST',
-		  	body: JSON.stringify({value : this.value})}
-		).then((r) => r.json()).then((r) => {//difficult
+		  	body: JSON.stringify({value : this.value})
+		}).then((r) => r.json()).then((r) => {//difficult
 			this.res = r.results
-		})		 
+		})
 	}
+
 	_setValue(e) { 
 		this.value = e.target.value
 	}
