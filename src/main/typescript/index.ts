@@ -14,7 +14,7 @@ export class FetchingData extends LitElement {
 		return html`
 		${styles}
 		<input type="text"  name="line-1" .value="${this.value}" @input="${this._setValue}">
-		<button @click="${this._click}">get</button>
+		<button @click="${this._get}">get</button>
 		<table>
 			<thead>
 				<tr>
@@ -29,7 +29,7 @@ export class FetchingData extends LitElement {
 		</table>
 		`
 	}
-	_click() {
+	_get() {
 		fetch("/get.do?value=" + this.value).then((r) => r.json()).then((r) => {
 			this.res = r.results
 		})		 
