@@ -8,6 +8,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,8 +18,9 @@ import org.springframework.test.context.junit.jupiter.web.SpringJUnitWebConfig;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.context.ContextLoaderListener;
@@ -50,12 +52,12 @@ public class WelcomeController {
 
 	@Autowired RestTemplate restTemplate;
 	
-	@RequestMapping(value = "/get.do")
-	public @ResponseBody People data(Model model, @RequestParam(name = "value", required = false) String value) {
+	@PostMapping("/post.do")
+	public @ResponseBody People data(Model model, @RequestBody Map data) {
 		People p = restTemplate.getForObject("https://swapi.dev/api/people/", People.class);
 		List<Result> results = new ArrayList<>();
 		for(Result r : p.getResults()) {
-			if(r.getName().contains(value)) {
+			if(r.getName().contains((String)data.get("value"))) {
 				results.add(r);
 			}
 		}

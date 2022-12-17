@@ -14,7 +14,7 @@ export class FetchingData extends LitElement {
 		return html`
 		${styles}
 		<input type="text"  name="line-1" .value="${this.value}" @input="${this._setValue}">
-		<button @click="${this._get}">get</button>
+		<button @click="${this._post}">post</button>
 		<table>
 			<thead>
 				<tr>
@@ -29,8 +29,13 @@ export class FetchingData extends LitElement {
 		</table>
 		`
 	}
-	_get() {
-		fetch("/get.do?value=" + this.value).then((r) => r.json()).then((r) => {
+	_post() {
+		var data = {value : this.value}
+		const headers = new Headers({
+			'Accept': 'application/json',
+			'Content-Type': 'application/json'
+		})
+		fetch("/post.do",{headers,method: 'POST', body: JSON.stringify(data)}).then((r) => r.json()).then((r) => {
 			this.res = r.results
 		})		 
 	}
