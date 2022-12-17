@@ -4,7 +4,6 @@
 		"watch": "webpack --watch"
 	},
 	"dependencies": {
-		"@polymer/polymer": "^3.5.1",
 		"lit": "^2.5.0"
 	},
 	"devDependencies": {
