@@ -5,9 +5,8 @@ import { styles } from './styles'
 
 @customElement('fetching-data')
 export class FetchingData extends LitElement {
-	@property()
-	res = []
-	value = ""
+	@property({type : Array}) res = [] 
+	@property({type : String}) value = ""
 
 	render() {
 		return html`
