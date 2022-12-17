@@ -4,3 +4,5 @@
 ## undertow jakarta embedded (not yet. but...)
 ## native using aot
 ## Open Web Components add (webpack, typescript, polymer, lit)
+### yarn install 
+### yarn run watch
