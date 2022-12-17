@@ -53,11 +53,11 @@ public class WelcomeController {
 	@Autowired RestTemplate restTemplate;
 	
 	@PostMapping("/post.do")
-	public @ResponseBody People data(Model model, @RequestBody Map data) {
+	public @ResponseBody People data(Model model, @RequestBody Map<String, String> data) {
 		People p = restTemplate.getForObject("https://swapi.dev/api/people/", People.class);
 		List<Result> results = new ArrayList<>();
 		for(Result r : p.getResults()) {
-			if(r.getName().contains((String)data.get("value"))) {
+			if(r.getName().contains(data.get("value"))) {
 				results.add(r);
 			}
 		}
