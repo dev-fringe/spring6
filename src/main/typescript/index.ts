@@ -1,5 +1,5 @@
 import { LitElement, html } from 'lit'
-import { customElement, property } from 'lit-element/decorators.js'
+import { customElement, property } from 'lit/decorators.js'
 import { styles } from './styles'
 
 @customElement('fetching-data')
@@ -11,7 +11,7 @@ export class FetchingData extends LitElement {
 		return html`
 			${styles}
 			<input type="text"  name="line-1" .value="${this.value}" @input="${this._setValue}">
-			<button @click="${this._post}">post</button><br/>
+			<button @click="${this._post}">post</button><br/><br/>
 			<table>
 				<thead>
 					<tr>
@@ -28,7 +28,7 @@ export class FetchingData extends LitElement {
 			</table>
 		`
 	}
-	
+
 	_post() {
 		fetch("/postJSON.do",{
 			headers: {
@@ -38,8 +38,9 @@ export class FetchingData extends LitElement {
 		 	method: 'POST',
 		  	body: JSON.stringify({value : this.value})
 		})
-		.then((r) => r.json())
-		.then((r) => this.res = r.results)// api 특성상 res를 이렇게 쎠야 한다. 가독성 떨어짐.  
+		.then(r => r.json())
+		.then(r => this.res = r.results)// api 특성상 res를 이렇게 쎠야 한다. 가독성 떨어짐.  
+		.catch(e => console.log(e))
 	}
 
 	_setValue(e) { 
