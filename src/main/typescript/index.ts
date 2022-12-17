@@ -37,9 +37,13 @@ export class FetchingData extends LitElement {
 		  	},
 		 	method: 'POST',
 		  	body: JSON.stringify({value : this.value})
-		}).then((r) => r.json()).then((r) => {//difficult
-			this.res = r.results
 		})
+		.then(function (r) {
+			return r.json();
+		})
+		.then(function (r) {
+			this.res = r.results
+		})// res를 이렇게 쎠야 한다.
 	}
 
 	_setValue(e) { 
