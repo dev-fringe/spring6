@@ -30,12 +30,14 @@ export class FetchingData extends LitElement {
 		`
 	}
 	_post() {
-		var data = {value : this.value}
-		const headers = new Headers({
+		fetch("/post.do",
+			{headers: {
 			'Accept': 'application/json',
 			'Content-Type': 'application/json'
-		})
-		fetch("/post.do",{headers,method: 'POST', body: JSON.stringify(data)}).then((r) => r.json()).then((r) => {
+		  	},
+		 	method: 'POST',
+		  	body: JSON.stringify({value : this.value})}
+		).then((r) => r.json()).then((r) => {//difficult
 			this.res = r.results
 		})		 
 	}
