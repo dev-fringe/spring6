@@ -5,7 +5,9 @@ import static io.undertow.servlet.Servlets.deployment;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,6 +18,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.context.ContextLoaderListener;
@@ -24,6 +27,7 @@ import org.springframework.web.context.support.AnnotationConfigWebApplicationCon
 import org.springframework.web.servlet.DispatcherServlet;
 
 import dev.fringe.model.People;
+import dev.fringe.model.Result;
 import io.undertow.Handlers;
 import io.undertow.Undertow;
 import io.undertow.servlet.Servlets;
@@ -47,8 +51,16 @@ public class WelcomeController {
 	@Autowired RestTemplate restTemplate;
 	
 	@RequestMapping(value = "/get.do")
-	public @ResponseBody People data(Model model) {
-		return restTemplate.getForObject("https://swapi.dev/api/people/", People.class);
+	public @ResponseBody People data(Model model, @RequestParam(name = "value", required = false) String value) {
+		People p = restTemplate.getForObject("https://swapi.dev/api/people/", People.class);
+		List<Result> results = new ArrayList<>();
+		for(Result r : p.getResults()) {
+			if(r.getName().contains(value)) {
+				results.add(r);
+			}
+		}
+		p.setResults(results);
+		return p;
 	}
 
 	// JUnit
