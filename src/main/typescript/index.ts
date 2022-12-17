@@ -27,7 +27,7 @@ export class FetchingData extends LitElement {
 			<tbody>
 		</table>
 		`
-	}
+	}//repeat또한 가독성.
 
 	_post() {
 		fetch("/postJSON.do",{
@@ -37,16 +37,16 @@ export class FetchingData extends LitElement {
 		  	},
 		 	method: 'POST',
 		  	body: JSON.stringify({value : this.value})
-		})
+		})// 이것또한 가독성.
 		.then(function (r) {
 			return r.json();
 		})
 		.then(function (r) {
 			this.res = r.results
-		})// res를 이렇게 쎠야 한다.
+		})// res를 이렇게 쎠야 한다. 가독성 떨어짐.  
 	}
 
 	_setValue(e) { 
-		this.value = e.target.value
+		this.value = e.target.value//form serialize 방법
 	}
 } 
