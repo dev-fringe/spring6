@@ -4,9 +4,11 @@ import { styles } from './styles'
 
 @customElement('fetching-data')
 export class FetchingData extends LitElement {
+
 	@property({type : Array}) res = []
-	@query('#first') _input:HTMLInputElement
-	@query('#last') _last:HTMLInputElement
+	@query('#first') _input : HTMLInputElement
+	@query('#last') _last : HTMLInputElement
+	s
 	render() {
 		return html`
 			${styles}
@@ -33,7 +35,7 @@ export class FetchingData extends LitElement {
 	_post() {
 		var json = {
 			value : this._input.value, value2 : this._last.value
-		}//form
+		}// TODO : form serialize 
 		fetch("/postJSON.do",{
 			headers: {
 				'Accept': 'application/json',
