@@ -31,13 +31,16 @@ export class FetchingData extends LitElement {
 	}
 
 	_post() {
+		var json = {
+			value : this._input.value, value2 : this._last.value
+		}//form
 		fetch("/postJSON.do",{
 			headers: {
 				'Accept': 'application/json',
 				'Content-Type': 'application/json'
 		  	},
 		 	method: 'POST',
-		  	body: JSON.stringify({value : this._input.value, value2 : this._last.value})
+		  	body: JSON.stringify(json)
 		})
 		.then(r => r.json())
 		.then(r => this.res = r.results)// api 특성상 res를 이렇게 쎠야 한다. 가독성 떨어짐.  
