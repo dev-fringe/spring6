@@ -10,7 +10,7 @@ export class FetchingData extends LitElement {
 	render() {
 		return html`
 			${styles}
-			<input type="text"  name="line-1" .value="${this.value}" @input="${this._setValue}">
+			<input type="text"  name="line-1" .value="${this.value}" @input="${this._onChange}">
 			<button @click="${this._post}">post</button><br/><br/>
 			<table>
 				<thead>
@@ -43,7 +43,5 @@ export class FetchingData extends LitElement {
 		.catch(e => console.log(e))
 	}
 
-	_setValue(e) { 
-		this.value = e.target.value//form serialize 방법
-	}
+	_onChange = e => this.value = e.target.value
 }
