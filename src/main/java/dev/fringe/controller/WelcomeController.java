@@ -54,6 +54,7 @@ public class WelcomeController {
 	
 	@PostMapping("/postJSON.do")
 	public @ResponseBody People data(Model model, @RequestBody Map<String, String> data) {
+		log.info(data);
 		People p = restTemplate.getForObject("https://swapi.dev/api/people/", People.class);
 		List<Result> results = new ArrayList<>();
 		for(Result r : p.getResults()) {

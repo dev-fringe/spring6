@@ -1,16 +1,17 @@
 import { LitElement, html } from 'lit'
-import { customElement, property } from 'lit/decorators.js'
+import { customElement, property, query } from 'lit/decorators.js'
 import { styles } from './styles'
 
 @customElement('fetching-data')
 export class FetchingData extends LitElement {
 	@property({type : Array}) res = []
-	@property({type : String}) value = ""
-
+	@query('#first') _input:HTMLInputElement
+	@query('#last') _last:HTMLInputElement
 	render() {
 		return html`
 			${styles}
-			<input type="text"  name="line-1" .value="${this.value}" @input="${this._onChange}">
+			<input id='first' />
+			<input id='last' />			
 			<button @click="${this._post}">post</button><br/><br/>
 			<table>
 				<thead>
@@ -36,12 +37,10 @@ export class FetchingData extends LitElement {
 				'Content-Type': 'application/json'
 		  	},
 		 	method: 'POST',
-		  	body: JSON.stringify({value : this.value})
+		  	body: JSON.stringify({value : this._input.value, value2 : this._last.value})
 		})
 		.then(r => r.json())
 		.then(r => this.res = r.results)// api 특성상 res를 이렇게 쎠야 한다. 가독성 떨어짐.  
 		.catch(e => console.log(e))
 	}
-
-	_onChange = e => this.value = e.target.value
 }
