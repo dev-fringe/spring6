@@ -4,6 +4,8 @@
 		"watch": "webpack --watch"
 	},
 	"dependencies": {
+		"@polymer/paper-button": "^3.0.1",
+		"@polymer/paper-input": "^3.2.1",
 		"lit": "^2.5.0"
 	},
 	"devDependencies": {
