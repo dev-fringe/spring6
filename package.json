@@ -4,8 +4,10 @@
 		"watch": "webpack --watch"
 	},
 	"dependencies": {
-		"@polymer/paper-button": "^3.0.1",
-		"@polymer/paper-input": "^3.2.1",
+		"@vaadin/grid": "^23.3.1",
+		"@vaadin/router": "^1.7.4",
+		"@vaadin/text-field": "^23.3.1",
+		"@vaadin/vaadin-button": "^23.3.1",
 		"lit": "^2.5.0"
 	},
 	"devDependencies": {
