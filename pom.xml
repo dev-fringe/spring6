@@ -42,8 +42,8 @@
 		
 		<dependency>
 		    <groupId>io.undertow</groupId>
-		    <artifactId>undertow-servlet-jakarta</artifactId>
-		    <version>2.2.20.Final</version>
+		    <artifactId>undertow-servlet</artifactId>
+		    <version>2.3.2.Final</version>
 		</dependency>
 
 		<dependency>

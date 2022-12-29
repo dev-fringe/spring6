@@ -93,4 +93,6 @@ footer {
 	</footer>
 </body>
 </html>
-<script type="module" src="main.js"></script>
+<% for (var js in htmlWebpackPlugin.files.js) { %>
+	<script type="module" src="<%= htmlWebpackPlugin.files.js[js] %>"></script>
+<% } %>

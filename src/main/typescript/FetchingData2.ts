@@ -1,10 +1,7 @@
 import { LitElement, html } from 'lit'
 import { customElement, property, query } from 'lit/decorators.js'
-import '@vaadin/vaadin-button/vaadin-button.js'
-import '@vaadin/grid/theme/material/vaadin-grid.js';
-import '@vaadin/text-field/theme/material/vaadin-text-field.js'
 import { styles } from './styles'
-
+ 
 @customElement('fetching-data2')
 export class FetchingData2 extends LitElement {
 
