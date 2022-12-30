@@ -11,6 +11,7 @@
 		"lit": "^2.5.0"
 	},
 	"devDependencies": {
+		"clean-webpack-plugin": "^4.0.0",
 		"crypto-js": "^4.1.1",
 		"esbuild-loader": "^2.20.0",
 		"html-webpack-plugin": "^5.5.0",
