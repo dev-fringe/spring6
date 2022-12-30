@@ -1,9 +1,12 @@
 import { LitElement, html } from 'lit'
 import { customElement, property, query } from 'lit/decorators.js'
-import { styles } from './styles'
- 
-@customElement('fetching-data2')
-export class FetchingData2 extends LitElement {
+import '@vaadin/vaadin-button/vaadin-button.js'
+import '@vaadin/grid/theme/material/vaadin-grid.js';
+import '@vaadin/text-field/theme/material/vaadin-text-field.js'
+import { styles } from '../styles/styles'
+
+@customElement('fetching-data')
+class FetchingData extends LitElement {
 
 	@property({type : Array}) res = []
 	@query('#first') _input : HTMLInputElement
@@ -12,20 +15,12 @@ export class FetchingData2 extends LitElement {
 	render() {
 		return html`
 			${styles}
-			<table>
-				<thead>
-					<tr>
-						<th>
-							Name
-						</th> 
-					</tr>
-				</thead>
-				<tbody>
-				${this.res.map((item) =>
-					html`<tr class="striped"><td>${item.name}</td></tr>`
-				)}
-				<tbody>
-			</table>
+			<vaadin-text-field id='first' clear-button-visible></vaadin-text-field>
+			<vaadin-text-field id='last' clear-button-visible></vaadin-text-field>
+			<vaadin-button @click="${this._post}" theme="normal">POST</vaadin-button>
+			<vaadin-grid .items="${this.res}">
+			<vaadin-grid-column path="name"></vaadin-grid-column>
+		    </vaadin-grid>
 		`
 	}
 

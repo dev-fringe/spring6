@@ -94,5 +94,5 @@ footer {
 </body>
 </html>
 <% for (var js in htmlWebpackPlugin.files.js) { %>
-	<script type="module" src="<%= htmlWebpackPlugin.files.js[js] %>"></script>
+	<script type="module" src="/<%= projectName %>/<%= htmlWebpackPlugin.files.js[js] %>"></script>
 <% } %>

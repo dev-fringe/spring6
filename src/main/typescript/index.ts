@@ -8,7 +8,7 @@ function initRouter() {
     const outlet = document.querySelector('#app')
     const router = new Router(outlet)
     router.setRoutes([
-        { path: '/', component: 'fetching-data'},
-        { path: '/about', component: 'fetching-data2' }
+        { path: '/app', component: 'fetching-data'},
+        { path: '/app/about', component: 'fetching-data2' }
     ])
 }
