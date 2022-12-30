@@ -1,16 +1,13 @@
 const path = require('path');
 const fs = require('fs');
-const crypto = require("crypto-js");
-const _ = require('lodash');
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
-const projectName = 'app';
-const entries = {};
-const sourceDirectory = './src/main/typescript/'
-const sourceDirectory2 = 'src\\main\\typescript'
-fs.readdirSync(sourceDirectory).forEach(file => {
-	//entries[path.parse(file).name+ "." + crypto.HmacSHA1(path.parse(file).name+ _.now(), "dev-fringe").toString()] = sourceDirectory + file;
-});
+const _ = require('lodash');
+const crypto = require("crypto-js");
+const projectName = 'app'; //TODO
+const entries = {}; //TODO
+const sourceDirectory = './src/main/typescript/' //TODO
+const sourceDirectory2 = 'src\\main\\typescript' // windows file system TODO
 
 function getFiles(dirPath, currentLevel, maxLevel) {
 	if (currentLevel > maxLevel) {
@@ -23,9 +20,10 @@ function getFiles(dirPath, currentLevel, maxLevel) {
 			if (stat.isDirectory()) {
 				getFiles(filepath, currentLevel + 1, maxLevel);
 			} else {
-				let addPath = (path.parse(filepath).dir).replace(sourceDirectory2, '') + '/';
-				entries[addPath.replace('\\', '/') + path.parse(filepath).name + "." + crypto.HmacSHA1(path.parse(filepath).name + _.now(), "dev-fringe").toString()] = './' + filepath;
-
+				//TODO
+				let addPath = ((path.parse(filepath).dir).replace(sourceDirectory2, '') + '/').replace('\\', '/');
+				let hash = crypto.HmacSHA1(path.parse(filepath).name + _.now(), "dev-fringe").toString();
+				entries[addPath + path.parse(filepath).name + "." + hash] = './' + filepath;
 			}
 		});
 	}
