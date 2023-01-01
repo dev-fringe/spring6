@@ -25,6 +25,7 @@ public class CommonConfig {
 	PeopleClient peopleClient() {// open-feign -> @EnableFeignClient -> @FeignClient
 		return Feign.builder()
 				.contract(new SpringContract())
+				//.client((new TracingClient(feignCompatibleClient, tracer)))
 				.encoder(new JacksonEncoder())
 				.decoder(new JacksonDecoder())
 				.target(PeopleClient.class, "https://swapi.dev/");
