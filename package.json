@@ -1,13 +1,16 @@
 {
 	"scripts": {
-		"build": "webpack",
-		"watch": "webpack --watch"
+		"build": "webpack --mode=development",
+		"watch": "webpack --mode=development --watch",
+		"prod": "webpack --mode=production"
 	},
 	"dependencies": {
-		"@vaadin/grid": "^23.3.1",
+		"@vaadin/grid": "^23.3.2",
+		"@vaadin/notification": "^23.3.2",
 		"@vaadin/router": "^1.7.4",
-		"@vaadin/text-field": "^23.3.1",
-		"@vaadin/vaadin-button": "^23.3.1",
+		"@vaadin/text-field": "^23.3.2",
+		"@vaadin/upload": "^23.3.2",
+		"@vaadin/vaadin-button": "^23.3.2",
 		"lit": "^2.5.0"
 	},
 	"devDependencies": {

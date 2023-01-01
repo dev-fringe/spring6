@@ -18,7 +18,6 @@ import org.springframework.test.context.junit.jupiter.web.SpringJUnitWebConfig;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -28,6 +27,7 @@ import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
 
+import dev.fringe.client.PeopleClient;
 import dev.fringe.model.People;
 import dev.fringe.model.Result;
 import io.undertow.Handlers;
@@ -51,18 +51,21 @@ public class WelcomeController {
 	}
 
 	@Autowired RestTemplate restTemplate;
+	@Autowired PeopleClient peopleClient;
 	
-	@PostMapping("/postJSON.do")
-	public @ResponseBody People data(Model model, @RequestBody Map<String, String> data) {
+	@RequestMapping("/postJSON.do")
+	public @ResponseBody People data(Model model, @RequestBody(required = false) Map<String, String> data) {
 		log.info(data);
-		People p = restTemplate.getForObject("https://swapi.dev/api/people/", People.class);
-		List<Result> results = new ArrayList<>();
-		for(Result r : p.getResults()) {
-			if(r.getName().contains(data.get("value"))) {
-				results.add(r);
+		People p = peopleClient.people();
+		if(data != null) {
+			List<Result> results = new ArrayList<>();
+			for(Result r : p.getResults()) {
+				if(r.getName().contains(data.get("value"))) {
+					results.add(r);
+				}
 			}
+			p.setResults(results);
 		}
-		p.setResults(results);
 		return p;
 	}
 

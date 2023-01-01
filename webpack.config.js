@@ -39,7 +39,6 @@ module.exports = {
 	resolve: {
 		extensions: ['.ts']
 	},
-	mode: 'production',
 	module: {
 		rules: [{
 			test: /\.ts$/,

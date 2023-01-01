@@ -1,7 +1,7 @@
 import { LitElement, html } from 'lit'
 import { customElement, property, query } from 'lit/decorators.js'
 import { styles } from '../styles/styles'
- 
+
 @customElement('fetching-data2')
 export class FetchingData2 extends LitElement {
 
