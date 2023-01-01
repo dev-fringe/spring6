@@ -21,7 +21,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
@@ -50,7 +49,7 @@ public class WelcomeController {
 		return "Hello";
 	}
 
-	@Autowired RestTemplate restTemplate;
+	//@Autowired RestTemplate restTemplate;
 	@Autowired PeopleClient peopleClient;
 	
 	@RequestMapping("/postJSON.do")
