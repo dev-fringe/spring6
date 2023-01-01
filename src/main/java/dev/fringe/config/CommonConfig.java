@@ -20,7 +20,7 @@ public class CommonConfig {
 		return new RestTemplate();
 	}
 	@Bean
-	PeopleClient peopleClient() {
+	PeopleClient peopleClient() {// open-feign -> EnableFeignClient
 		return Feign.builder().decoder(new JacksonDecoder()).target(PeopleClient.class, "https://swapi.dev/");
 	}
 }
