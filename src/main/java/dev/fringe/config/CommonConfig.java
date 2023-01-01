@@ -20,10 +20,12 @@ public class CommonConfig {
 	RestTemplate restTemplate() {//cloud open-feign
 		return new RestTemplate();
 	}
+	
 	@Bean
 	PeopleClient peopleClient() {// open-feign -> @EnableFeignClient -> @FeignClient
 		return Feign.builder()
 				.contract(new SpringContract())
-				.decoder(new JacksonDecoder()).target(PeopleClient.class, "https://swapi.dev/");
+				.decoder(new JacksonDecoder())
+				.target(PeopleClient.class, "https://swapi.dev/");
 	}
 }
