@@ -126,7 +126,7 @@
 		</dependency>
 		<dependency>
 		    <groupId>io.github.openfeign</groupId>
-		    <artifactId>feign-ribbon</artifactId>
+		    <artifactId>feign-spring4</artifactId>
 		    <version>12.1</version>
 		</dependency>
 	</dependencies>

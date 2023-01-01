@@ -8,6 +8,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import dev.fringe.client.PeopleClient;
 import feign.Feign;
 import feign.jackson.JacksonDecoder;
+import feign.spring.SpringContract;
 
 @Configuration
 @EnableWebMvc
@@ -21,6 +22,8 @@ public class CommonConfig {
 	}
 	@Bean
 	PeopleClient peopleClient() {// open-feign -> @EnableFeignClient -> @FeignClient
-		return Feign.builder().decoder(new JacksonDecoder()).target(PeopleClient.class, "https://swapi.dev/");
+		return Feign.builder()
+				.contract(new SpringContract())
+				.decoder(new JacksonDecoder()).target(PeopleClient.class, "https://swapi.dev/");
 	}
 }

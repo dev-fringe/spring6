@@ -1,10 +1,11 @@
 package dev.fringe.client;
 
+import org.springframework.web.bind.annotation.GetMapping;
+
 import dev.fringe.model.People;
-import feign.RequestLine;
 
 public interface PeopleClient {
 
-    @RequestLine("GET /api/people/")
+    @GetMapping("/api/people/")
     People people();
 }
